@@ -3,7 +3,7 @@
 .watermark::after {
   /* content: "驗證成功！"; */
   content: url("/static/imgs/verified-icon.png");
-  transform: scale(.5);
+  transform: scale(1.5);
   /* background-image: url("/static/imgs/verified-icon.png"); */
   position: absolute;
   top: 0%;
