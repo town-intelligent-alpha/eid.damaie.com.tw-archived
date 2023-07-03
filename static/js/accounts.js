@@ -55,34 +55,6 @@ function change_pw(dataJSON) {
   });
 }
 
-function uploadAvatarImg(base64Img) {
-  var dataJSON = {};
-  var resultBool = false;
-  dataJSON.email = getLocalStorage("email");
-  dataJSON.img = base64Img;
-  $.ajax({
-    url: HOST_URL_EID_DAEMON + "/accounts/modify",
-    type: "POST",
-    async: false,
-    crossDomain: true,
-    data:  dataJSON,
-    success: function(returnData) {
-      const obj = JSON.parse(returnData);
-      if (obj.result) {
-        resultBool = true;
-      } else {
-        resultBool = false;
-      }
-    },
-    error: function(xhr, ajaxOptions, thrownError){
-      console.log(thrownError);
-      resultBool = false;
-    }
-  });
-
-  return resultBool;
-}
-
 function modify_username(username) {
   // Modify account
   var dataJSON = {};
