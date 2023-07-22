@@ -3,8 +3,8 @@ function task_save_to_eID(obj_task) {
   var resultJSON = {};
   try {
     resultJSON = task_save(obj_task);
-  } catch (e) { 
-    console.log(e); 
+  } catch (e) {
+    console.log(e);
     alert("您掃描的 QR Code 可能有問題！請洽系統管理員！ (003)");
   }
 }
@@ -38,12 +38,12 @@ function setPageInfo() {
     setInfoEid();
   } else if (page.includes("issues")) {
     $("#nav-issues").addClass("active");
-    
+
     // List issues
     if (page === "issues.html") {
       list_issues(getLocalStorage("email"));
     }
-    
+
   } else if (page == "foot_print.html") {
     $("#nav-foot_print").addClass("active");
 
@@ -129,7 +129,7 @@ function setPageInfo() {
         var obj_td_name = document.createElement("td");
         obj_td_name.className = "align-middle";
         obj_td_name.style="font-size: 12px; min-width:200px"
-        
+
         if (parseInt(obj_task.type_task) == 0) {
           obj_td_name.innerHTML = obj_parent_task.name;
         } else {
@@ -143,26 +143,26 @@ function setPageInfo() {
 
         // SDGs
         var content = JSON.parse(obj_task.content);
-        for(let index = 1; index <= 27; index++) {
+        for(let index = 1; index <= 17; index++) {
           // Check SDGs
           if (content["sdgs-" + index.toString()] != "1") {
             continue;
           }
-  
+
           var a = document.createElement("a");
           a.className = "d-block";
-  
+
           var img = document.createElement("img");
           img.className = "mr-2 mb-2";
-  
+
           let path = "";
           if (index < 10) {
             path = "/static/imgs/SDGS/E_WEB_0";
           } else {
             path = "/static/imgs/SDGS/E_WEB_";
           }
-  
-          img.src = path + index.toString() + ".png";
+
+          img.src = path + index.toString() + ".svg";
           img.setAttribute("width", "30px");
           img.setAttribute("height", "30px");
 
@@ -187,12 +187,12 @@ function setPageInfo() {
         obj_div_submit.style="min-width:150px";
 
         obj_div_submit.setAttribute("onclick", "location.href='/tasks/activity_participation.html?uuid=" + obj_task.uuid + "&gps=" + gps + "'");
-        
+
         obj_div_submit.innerHTML = "參與任務";
 
         // Append
         obj_td_submit.append(obj_div_submit);
-        
+
         obj_tr.append(obj_td_name);
         obj_tr.append(obj_td_sdg);
         obj_tr.append(obj_td_period);
@@ -206,7 +206,7 @@ function setPageInfo() {
       var urlParams = new URLSearchParams(queryString);
       var uuid = urlParams.get("uuid");
       var gps = urlParams.get("gps");
-      
+
       // Set Task
       setLocalStorage("target", uuid);
 
@@ -218,7 +218,7 @@ function setPageInfo() {
         uuid_target_parent = get_parent_task(obj_target.uuid);
         obj_target_parent = get_task_description(uuid_target_parent);
       }
-      
+
       var task_period = [];
       try {
         if (parseInt(obj_target.type_task) == 0) {
@@ -236,7 +236,7 @@ function setPageInfo() {
 
       if (parseInt(obj_target.type_task) == 0) {
         document.getElementById("task_name").value = obj_target_parent.name;
-      } else {  
+      } else {
         document.getElementById("task_name").value = obj_target.name;
       }
 
@@ -245,7 +245,7 @@ function setPageInfo() {
       var content = obj_target.content.replace(/'/g, '"')
       var obj_target_content = JSON.parse(content);
 
-      for(let index = 1; index <= 27; index++) {
+      for(let index = 1; index <= 17; index++) {
         // Check SDGs
         if (obj_target_content["sdgs-" + index.toString()] != "1") {
 	        continue;
@@ -264,7 +264,7 @@ function setPageInfo() {
           path = "/static/imgs/SDGS/E_WEB_";
         }
 
-        img.src = path + index.toString() + ".png";
+        img.src = path + index.toString() + ".svg";
         img.setAttribute("width", "30px");
         img.setAttribute("height", "30px");
 
@@ -287,7 +287,7 @@ function setPageInfo() {
           return {"result" :false, "content": "Geolocation is not supported by this browser."};
         }
       }
-    } 
+    }
 }
 
 function pushPosition(position) {
@@ -295,6 +295,6 @@ function pushPosition(position) {
   var queryString = window.location.search;
   var urlParams = new URLSearchParams(queryString);
   var uuid = urlParams.get("uuid");
-  
+
   gps_set(position.coords.latitude, position.coords.longitude,  uuid);
 }
