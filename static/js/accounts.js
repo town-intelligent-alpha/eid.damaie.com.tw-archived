@@ -38,8 +38,8 @@ function signup(dataJSON) {
   return resultJSON;
 }
 
-function change_pw(dataJSON) {     
-  var resultJSON = {};   
+function change_pw(dataJSON) {
+  var resultJSON = {};
   $.ajax({
     url: HOST_URL_EID_DAEMON + "/accounts/modify",
     type: "POST",
@@ -54,6 +54,7 @@ function change_pw(dataJSON) {
     }
   });
 }
+
 
 function modify_username(username) {
   // Modify account
@@ -82,7 +83,7 @@ function getAccountAvatarImg() {
   var dataJSON = {};
   var resultJSON = {};
   dataJSON.email = getLocalStorage("email");
-  
+
   $.ajax({
     url: HOST_URL_EID_DAEMON + "/accounts/get_avatar_img",
     type: "POST",

@@ -5,7 +5,7 @@ function edit_username() {
 
   // Reset LocalStorage
   try {
-    setLocalStorage("username", retultJSON.username);
+    setLocalStorage("username", retultJSON.profile.username);
     window.location.replace("/eid.html");
   } catch (e) {console.log(e);}
 }
